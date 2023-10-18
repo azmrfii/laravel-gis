@@ -23,6 +23,9 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        // we get the content of the file and pass it to the view in a variable called geojson
+        $geojson = file_get_contents(resource_path('/geojson/monuments.geojson'));
+
+        return view('dashboard', ['geojson' => $geojson]);
     })->name('dashboard');
 });
